@@ -1,21 +1,21 @@
 def copy_file(command: str) -> None:
-    list_com = command.split()
-    if len(list_com) < 3:
+    command_parts = command.split()
+    if len(command_parts) != 3:
         return
-    if list_com[0] != "cp":
+    if command_parts[0] != "cp":
         return
-    if list_com[1] == list_com[2]:
+    if command_parts[1] == command_parts[2]:
         return
     try:
-        with (open(list_com[1],
+        with (open(command_parts[1],
                    "r",
                   newline="",
-                  encoding="utf-8") as f_r,
-              open(list_com[2],
+                  encoding="utf-8") as file_read,
+              open(command_parts[2],
                    "w",
                    newline="",
-                   encoding="utf-8") as f_w):
-            for line in f_r:
-                f_w.write(line)
+                   encoding="utf-8") as file_write):
+            for line in file_read:
+                file_write.write(line)
     except FileNotFoundError:
         return
